@@ -2,7 +2,8 @@
 ## Project Rubric found in here https://review.udacity.com/#!/rubrics/16/view
 To achieve PageSpeed score of at least 90 for Mobile and Desktop for index.html / project-2048.html / project-mobile.html / project-webperf.html
 
-1. Remove Google Font - Open Sans as this is not utilized.
+Mobile PageSpeed Score of 97/100 and Desktop PageSpeed Score 98/100
+1. Remove Google Font - Open Sans 
 2. For the print.css added the media="print"
 3. Added the async attribute for perfmatters.js script to load asyncronously
 4.              - javascript minified by using gulp task js-compile-src, js-compile-view respectively output in respective /dist folders
@@ -31,7 +32,7 @@ To achieve PageSpeed score of at least 90 for Mobile and Desktop for index.html 
                            $> cd /path/to/your-project-folder
                            $> ./ngrok http 8080
                            ```
-                         Type the generated URL - note this top level project directory so need to navigate 
+                         Type the generated URL - note this top level project directory so need to navigate
 
 ##Getting Rid of jank
 Optimization made to  functions
