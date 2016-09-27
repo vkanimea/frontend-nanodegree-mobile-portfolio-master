@@ -18,6 +18,7 @@ cameron *at* udacity *dot* com
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
+"use strict";
 var pizzaIngredients = {};
 pizzaIngredients.meats = [
   "Pepperoni",
@@ -406,13 +407,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("#pizzaSize").innerHTML = "Small"; //Change the querySelector to getElementById
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("#pizzaSize").innerHTML = "Medium"; //Change the querySelector to getElementById
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+      document.getElementById("#pizzaSize").innerHTML = "Large";  //Change the querySelector to getElementById
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -444,9 +445,9 @@ var resizePizzas = function(size) {
     // Changed the document.querySelectorAll to document.getElementsByClassName
     // To move the dom selector outside of the for loop, create a var randomPizzas to store this in
     var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
-
+    var len = randomPizzas.length
     // Simplifying to avoid forced reflow
-    for (var i = 0; i < randomPizzas.length; i++) {
+    for (var i = 0; i < len; i++) {
                randomPizzas[i].style.width = newWidth + "%";
        }
 }
@@ -463,8 +464,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas"); // Move the pizzasDiv outside of the loop
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -505,9 +506,8 @@ function updatePositions() {
     }
     // simiplify the processing of for loop
     for (i = 0; i < items.length; i++) {
-        var phase = phaseArray[i%5];
-        // adjusted to use requestAnimationFram translateX
-        items[i].style.transform = 'translateX('+(items[i].basicLeft + phase) + 'px)';
+        // adjusted to use requestAnimationFram translateX and refactored
+         items[i].style.transform = 'translateX('+(items[i].basicLeft + phaseArray[i % 5]) + 'px)';
     }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -526,20 +526,22 @@ window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var rows = Math.floor(window.innerHeight / 75);
-  var cols = Math.floor(window.innerWidth / 150)
+  var cols = Math.floor(window.innerWidth / 150);
   var pizzaTot = rows * cols;
   var halfWidth = window.innerWidth / 2;
   var halfHeight = window.innerHeight / 4;
   var s = 256;
   var movingPizzas = document.getElementById("movingPizzas1"); //move the dom selection out of the loop in a var movingPizzas
-  for (var i = 0; i < pizzaTot; i++) {   //Change no of pizza based on windows row & column
-    var elem = document.createElement('img');
+
+  for (var i = 0, elem; i < pizzaTot; i++) {   //Change no of pizza based on windows row & column
+    elem = document.createElement('img'); //set var elem
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     //to fix the pizzas only appearing on the right half of the page
     elem.basicLeft = ((i % cols) * s) - halfWidth;
+    //elem.style.left = ((i % cols) * s)  - halfWidth + 'px';  // Todo: Doesnt seem to work for now
     // Centers the pizzas based on the window size
     elem.style.top = ((Math.floor(i / cols) * s) - halfHeight) + 'px';
     // Moved variable outside of the for-loop and simply call it inside the for-loop

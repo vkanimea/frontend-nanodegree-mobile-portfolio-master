@@ -7,6 +7,7 @@ var gulp  = require('gulp'),
     gutil = require('gulp-util');
     closureCompiler = require('google-closure-compiler').gulp();
     cleanCSS = require('gulp-clean-css');
+    criticalCss = require('gulp-critical-css');
     imagemin = require('gulp-imagemin');
     htmlmin = require('gulp-htmlmin');
 
@@ -61,6 +62,22 @@ gulp.task('css-minify-view', function() {
         .pipe(gulp.dest('./dist//views/css'));
 });
 
+// Inline Critical CSS - avoid render blocking for ./src/css/style.css
+gulp.task('css-critical-src', function() {
+  return gulp.src('./src/css/style.css')
+    .pipe(criticalCss())
+    .pipe(gulp.dest('./dist/css'))
+});
+
+// Inline Critical CSS - avoid render blocking for ./src/view/css/style.css
+gulp.task('css-critical-view', function() {
+  return gulp.src('./src/views/css/style.css')
+    .pipe(criticalCss())
+    .pipe(gulp.dest('./dist/views/css'))
+});
+
+
+
 // Minify Images in ./src/img and output Minified image in ./dist/img
 gulp.task('images-minify-src', function() {
     return gulp.src('./src/img/*')
@@ -98,8 +115,11 @@ gulp.task('watchforChanges', function() {
     gulp.watch('./src/js/*.js',['js-compile-src'])
     gulp.watch('./src/views/js/*.js',['js-compile-view'])
     gulp.watch('./src/css/*.css',['css-minify-src'])
+    gulp.watch('./src/css/*.css',['css-critical-src'])
+    gulp.watch('./src/css/*.css',['css-critical-view'])
     gulp.watch('./src/views/css/*.css',['css-minify-view'])
  });
 
 // Runs the optimization for html, css, javascript, images and watches for any changes
-gulp.task('default', ['html-minify-src','html-minify-view','css-minify-src','css-minify-view','js-compile-src','js-compile-view','images-minify-src','images-minify-view','watchforChanges']);
+//To run this, just type gulp at the root where the gulpfile.js is located.
+gulp.task('default', ['html-minify-src','html-minify-view','css-critical-src','css-critical-view','css-minify-src','css-minify-view','js-compile-src','js-compile-view','images-minify-src','images-minify-view','watchforChanges']);
