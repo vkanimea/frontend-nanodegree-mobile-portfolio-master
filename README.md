@@ -4,20 +4,16 @@ To achieve PageSpeed score of at least 90 for Mobile and Desktop for index.html 
 
 Mobile PageSpeed Score of 97/100 and Desktop PageSpeed Score 98/100
 1. Remove Google Font - Open Sans
-2. For the print.css added the media="print"
-3. Added the async attribute for perfmatters.js script to load asyncronously
-4.              - javascript minified by using gulp task js-compress-src, js-compress-view respectively output in respective /dist folders
-                           /src/js/perfmatters.js -> /dist/js/perfmatters.js
-                           /src/views/main.js -> /dist/views/main.js                      
-5.              - css inline by using gulp task css-inline-src, css-inline-view respectively respectively output in respective /dist folders
-                          /src/css -> /dist/css
-                          /src/views/css -> /dist/views/css
-6.              - images resize by using gulp task  images-resize-src, images-resize-view respectively output in respective /dist folders
-                         /src/img -> /dist/img - Minified 4 images (saved 74.59 kB - 13.9%)
-                         /src/views/images -> /dist/views/images - Minified 2 images (saved 242.54 kB - 10%)
-7.               - html minified by using gulp task html-minify-src, html-minify-view respectively output in respective /dist folders
-                         /src/*.html -> /dist/*.html
-                         /src/views/pizza.html -> /dist/views/pizza.html
+
+2. Added the async attribute for perfmatters.js script to load asyncronously
+
+3.              - javascript minified by using gulp task js-compress-src, js-compress-view respectively output in respective /dist folders
+
+4.              - css inline by using gulp task css-inline-src, css-inline-view respectively respectively output in respective /dist folders
+
+5.              - images resize by using gulp task  images-resize-src, images-resize-view respectively output in respective /dist folders
+
+6.               - html minified by using gulp task html-minify-src, html-minify-view respectively output in respective /dist folders
 
                          ####Part 1: Optimize PageSpeed Insights score for index.html
 
@@ -59,11 +55,15 @@ e.*   For loop, It is better to save the array length, which is part of the cond
 
 ## Use of a Build Tool Gulp to automate production version
 There is a gulpfile.js at root that optimizes source code in /src into an output destination directory in /dist
+
     /dist is the destination for production code - spaces, comments removed and javascripts, inline css, images have been resized to 100px
     /src is source for the development code - this is readable for comments, javascript, css not inlined, images, html have NOT been Optimized
+
 To run the gulpfile.js just type gulp at the root folder to regenerate the /dist
 
 Please note that node.js needs to be installed first before can add the node modules or gulp plugins found in /node_modules. The gulp modules or plugins were installed using this command below:
+
   npm install --save-dev gulp gulp-util gulp-uglify gulp-inline-css gulp-inline-css gulp-responsive-images gulp-htmlmin
+  
 This is reference guide: https://scotch.io/tutorials/automate-your-tasks-easily-with-gulp-js
 List of other gulp plugins that can be added to your workflow: http://gulpjs.com/plugins/
