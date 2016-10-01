@@ -3,13 +3,13 @@
 To achieve PageSpeed score of at least 90 for Mobile and Desktop for index.html / project-2048.html / project-mobile.html / project-webperf.html
 
 Mobile PageSpeed Score of 97/100 and Desktop PageSpeed Score 98/100
-1. Remove Google Font - Open Sans 
+1. Remove Google Font - Open Sans
 2. For the print.css added the media="print"
 3. Added the async attribute for perfmatters.js script to load asyncronously
 4.              - javascript minified by using gulp task js-compile-src, js-compile-view respectively output in respective /dist folders
                            /src/js/perfmatters.js -> /dist/js/perfmatters.js
                            /src/views/main.js -> /dist/views/main.js                      
-5.              - css optimized by using gulp task css-minify-src, css-minify-view respectively respectively output in respective /dist folders
+5.              - css inline by using gulp task css-inline-src, css-minify-view respectively respectively output in respective /dist folders
                           /src/css -> /dist/css
                           /src/views/css -> /dist/views/css
 6.              - images optimized by using gulp task  images-minify-src, images-minify-view respectively output in respective /dist folders
@@ -56,15 +56,14 @@ c.*   use strict - this mode help secure codes for global variables; Todo: can a
 d.*   used getElementById instead of querySelector as web API call is faster ; Line 410, 413, 416
 e.*   For loop, It is better to save the array length, which is part of the condition statement, in a local variable, so the array's length property is not
      accessed to check its value at each iteration. (i.e. more efficiency) Line 448 / 449
-f.*
 
 ## Use of a Build Tool Gulp to automate production version
 There is a gulpfile.js at root that optimizes source code in /src into an output destination directory in /dist
-    /dist is the destination for production code - spaces, comments removed and javascripts, css, images, html have been Minified.
-    /src is source for the development code - this is readable for comments, javascript, css, images, html have NOT been Minified/Optimized
+    /dist is the destination for production code - spaces, comments removed and javascripts, inline css, images have been resized to 100px
+    /src is source for the development code - this is readable for comments, javascript, css not inlined, images, html have NOT been Optimized
 To run the gulpfile.js just type gulp at the root folder to regenerate the /dist
 
 Please note that node.js needs to be installed first before can add the node modules or gulp plugins found in /node_modules. The gulp modules or plugins were installed using this command below:
-  npm install gulp gulp-util google-closure-compiler gulp-clean-css gulp-imagemin gulp-htmlmin
+  npm install --save-dev gulp gulp-util google-closure-compiler gulp-inline-css gulp-htmltidy
 This is reference guide: https://scotch.io/tutorials/automate-your-tasks-easily-with-gulp-js
 List of other gulp plugins that can be added to your workflow: http://gulpjs.com/plugins/

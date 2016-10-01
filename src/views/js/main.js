@@ -407,13 +407,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.getElementById("#pizzaSize").innerHTML = "Small"; //Change the querySelector to getElementById
+        document.getElementById("pizzaSize").innerHTML = "Small"; //Change the querySelector to getElementById
         return;
       case "2":
-        document.getElementById("#pizzaSize").innerHTML = "Medium"; //Change the querySelector to getElementById
+        document.getElementById("pizzaSize").innerHTML = "Medium"; //Change the querySelector to getElementById
         return;
       case "3":
-      document.getElementById("#pizzaSize").innerHTML = "Large";  //Change the querySelector to getElementById
+      document.getElementById("pizzaSize").innerHTML = "Large";  //Change the querySelector to getElementById
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -445,7 +445,7 @@ var resizePizzas = function(size) {
     // Changed the document.querySelectorAll to document.getElementsByClassName
     // To move the dom selector outside of the for loop, create a var randomPizzas to store this in
     var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
-    var len = randomPizzas.length
+    var len = randomPizzas.length;
     // Simplifying to avoid forced reflow
     for (var i = 0; i < len; i++) {
                randomPizzas[i].style.width = newWidth + "%";
@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var movingPizzas = document.getElementById("movingPizzas1"); //move the dom selection out of the loop in a var movingPizzas
 
   for (var i = 0, elem; i < pizzaTot; i++) {   //Change no of pizza based on windows row & column
-    elem = document.createElement('img'); //set var elem
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
